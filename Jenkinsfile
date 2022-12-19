@@ -14,18 +14,12 @@ pipeline {
                 sh 'mvn surefire:test'
             }
         }
-         stage('Integration Tests') {
-            steps {
-                sh 'mvn failsafe:integration-test'
-            }
-        }
+        
     }
     post {
         always {
             junit 'target/surefire-reports/TEST-*.xml'
         }
-        failure {
-            mail to: 'kiwaczki@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
-        }
+        
     }
 }
